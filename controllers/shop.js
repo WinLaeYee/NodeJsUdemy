@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const stripe = require('stripe')('sk_test_51MM5GSLh6KvDk2HC8yDtTt4Tx00kwj0u7bLngsAyUvcAfehcYQKZ3nGVPtdrtJBOvCUChfxy1msWYQX7DWJfhVUP00GzaBTMK7');
+//const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
 
 const PDFDocument = require('pdfkit');
 
@@ -178,6 +179,8 @@ exports.getCheckout = (req, res, next) => {
           quantity: p.quantity
         }
       }),
+      //success_url:`${process.env.SERVER_URL}/success.html`,
+      //cancel_url:`${process.env.SERVER_URL}/cancel.html`
       success_url: req.protocol + '://' + req.get('host') + '/checkout/success', // => http://localhost:3000
       cancel_url: req.protocol +  '://' + req.get('host') + '/checkout/cancel'
     })
